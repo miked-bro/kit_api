@@ -12,26 +12,26 @@ module Kit
       end
 
       def update_tag(id, name:)
-        request(:put, "/tags/#{id}", body: { name: name })
+        request(:put, "/tags/#{esc(id)}", body: { name: name })
       end
 
       def tag_subscribers(id, **params)
-        request(:get, "/tags/#{id}/subscribers", params: params)
+        request(:get, "/tags/#{esc(id)}/subscribers", params: params)
       end
 
       def tag_subscriber(tag_id, email_address: nil, subscriber_id: nil)
         if subscriber_id
-          request(:post, "/tags/#{tag_id}/subscribers/#{subscriber_id}")
+          request(:post, "/tags/#{esc(tag_id)}/subscribers/#{esc(subscriber_id)}")
         else
-          request(:post, "/tags/#{tag_id}/subscribers", body: { email_address: email_address })
+          request(:post, "/tags/#{esc(tag_id)}/subscribers", body: { email_address: email_address })
         end
       end
 
       def untag_subscriber(tag_id, email_address: nil, subscriber_id: nil)
         if subscriber_id
-          request(:delete, "/tags/#{tag_id}/subscribers/#{subscriber_id}")
+          request(:delete, "/tags/#{esc(tag_id)}/subscribers/#{esc(subscriber_id)}")
         else
-          request(:delete, "/tags/#{tag_id}/subscribers", params: { email_address: email_address })
+          request(:delete, "/tags/#{esc(tag_id)}/subscribers", params: { email_address: email_address })
         end
       end
 

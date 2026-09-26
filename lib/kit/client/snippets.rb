@@ -8,7 +8,7 @@ module Kit
       end
 
       def snippet(id)
-        request(:get, "/snippets/#{id}")
+        request(:get, "/snippets/#{esc(id)}")
       end
 
       # snippet_type: "inline" takes content:; "block" takes document_attributes:.
@@ -17,7 +17,7 @@ module Kit
       end
 
       def update_snippet(id, **attributes)
-        request(:put, "/snippets/#{id}", body: attributes)
+        request(:put, "/snippets/#{esc(id)}", body: attributes)
       end
     end
   end

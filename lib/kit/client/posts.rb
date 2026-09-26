@@ -8,7 +8,7 @@ module Kit
       end
 
       def post(id)
-        request(:get, "/posts/#{id}")
+        request(:get, "/posts/#{esc(id)}")
       end
     end
   end

@@ -8,7 +8,7 @@ module Kit
       end
 
       def broadcast(id)
-        request(:get, "/broadcasts/#{id}")
+        request(:get, "/broadcasts/#{esc(id)}")
       end
 
       # send_at: nil leaves it a draft; subscriber_filter targets tags/segments.
@@ -17,15 +17,15 @@ module Kit
       end
 
       def update_broadcast(id, **attributes)
-        request(:put, "/broadcasts/#{id}", body: attributes)
+        request(:put, "/broadcasts/#{esc(id)}", body: attributes)
       end
 
       def delete_broadcast(id)
-        request(:delete, "/broadcasts/#{id}")
+        request(:delete, "/broadcasts/#{esc(id)}")
       end
 
       def broadcast_stats(id)
-        request(:get, "/broadcasts/#{id}/stats")
+        request(:get, "/broadcasts/#{esc(id)}/stats")
       end
 
       # Filters: sent_after/before, status.
@@ -34,7 +34,7 @@ module Kit
       end
 
       def broadcast_clicks(id, **params)
-        request(:get, "/broadcasts/#{id}/clicks", params: params)
+        request(:get, "/broadcasts/#{esc(id)}/clicks", params: params)
       end
     end
   end

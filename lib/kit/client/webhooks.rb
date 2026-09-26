@@ -8,7 +8,7 @@ module Kit
       end
 
       def webhook(id)
-        request(:get, "/webhook_endpoints/#{id}")
+        request(:get, "/webhook_endpoints/#{esc(id)}")
       end
 
       # The signing secret comes back in plaintext only on this response.
@@ -17,19 +17,19 @@ module Kit
       end
 
       def update_webhook(id, **attributes)
-        request(:put, "/webhook_endpoints/#{id}", body: attributes)
+        request(:put, "/webhook_endpoints/#{esc(id)}", body: attributes)
       end
 
       def delete_webhook(id)
-        request(:delete, "/webhook_endpoints/#{id}")
+        request(:delete, "/webhook_endpoints/#{esc(id)}")
       end
 
       def rotate_webhook_secret(id, force: nil)
-        request(:post, "/webhook_endpoints/#{id}/rotate_secret", body: { force: force }.compact)
+        request(:post, "/webhook_endpoints/#{esc(id)}/rotate_secret", body: { force: force }.compact)
       end
 
       def revoke_previous_webhook_secret(id)
-        request(:post, "/webhook_endpoints/#{id}/revoke_previous_secret")
+        request(:post, "/webhook_endpoints/#{esc(id)}/revoke_previous_secret")
       end
     end
   end

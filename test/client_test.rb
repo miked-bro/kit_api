@@ -113,6 +113,15 @@ class ClientTest < TestCase
     assert_match(/invalid/, error.body)
   end
 
+  def test_ids_cannot_splice_into_a_different_endpoint
+    stub = stub_request(:get, "#{BASE}/subscribers/42%2Funsubscribe").to_return(json({}))
+
+    @client.subscriber("42/unsubscribe")
+
+    assert_requested(stub)
+    assert_not_requested(:post, %r{/unsubscribe})
+  end
+
   def test_a_204_returns_true
     stub_request(:delete, "#{BASE}/custom_fields/3").to_return(status: 204, body: "")
 

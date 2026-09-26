@@ -10,7 +10,7 @@ module Kit
       end
 
       def subscriber(id)
-        request(:get, "/subscribers/#{id}")
+        request(:get, "/subscribers/#{esc(id)}")
       end
 
       # Upserts: an existing email_address gets its first_name updated.
@@ -19,11 +19,11 @@ module Kit
       end
 
       def update_subscriber(id, **attributes)
-        request(:put, "/subscribers/#{id}", body: attributes)
+        request(:put, "/subscribers/#{esc(id)}", body: attributes)
       end
 
       def unsubscribe_subscriber(id)
-        request(:post, "/subscribers/#{id}/unsubscribe")
+        request(:post, "/subscribers/#{esc(id)}/unsubscribe")
       end
 
       def bulk_create_subscribers(subscribers, callback_url: nil)
@@ -31,23 +31,23 @@ module Kit
       end
 
       def subscriber_stats(id, **params)
-        request(:get, "/subscribers/#{id}/stats", params: params)
+        request(:get, "/subscribers/#{esc(id)}/stats", params: params)
       end
 
       def subscriber_tags(id, **params)
-        request(:get, "/subscribers/#{id}/tags", params: params)
+        request(:get, "/subscribers/#{esc(id)}/tags", params: params)
       end
 
       def pin_subscriber_location(id, **location)
-        request(:post, "/subscribers/#{id}/location", body: { location: location })
+        request(:post, "/subscribers/#{esc(id)}/location", body: { location: location })
       end
 
       def update_subscriber_location(id, **location)
-        request(:patch, "/subscribers/#{id}/location", body: { location: location })
+        request(:patch, "/subscribers/#{esc(id)}/location", body: { location: location })
       end
 
       def delete_subscriber_location(id)
-        request(:delete, "/subscribers/#{id}/location")
+        request(:delete, "/subscribers/#{esc(id)}/location")
       end
     end
   end

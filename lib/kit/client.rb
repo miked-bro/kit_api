@@ -62,6 +62,10 @@ module Kit
     end
 
     private
+      # Ids land in URL paths; escaping keeps a hostile "42/unsubscribe"
+      # from splicing itself into a different endpoint.
+      def esc(id) = URI.encode_www_form_component(id.to_s)
+
       def tag_id(name)
         @tag_ids ||= {}
         @tag_ids[name] ||= begin

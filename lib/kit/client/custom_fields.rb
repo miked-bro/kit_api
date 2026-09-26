@@ -12,11 +12,11 @@ module Kit
       end
 
       def update_custom_field(id, label:)
-        request(:put, "/custom_fields/#{id}", body: { label: label })
+        request(:put, "/custom_fields/#{esc(id)}", body: { label: label })
       end
 
       def delete_custom_field(id)
-        request(:delete, "/custom_fields/#{id}")
+        request(:delete, "/custom_fields/#{esc(id)}")
       end
 
       def bulk_create_custom_fields(custom_fields, callback_url: nil)

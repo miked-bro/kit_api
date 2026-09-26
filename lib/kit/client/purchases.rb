@@ -8,7 +8,7 @@ module Kit
       end
 
       def purchase(id)
-        request(:get, "/purchases/#{id}")
+        request(:get, "/purchases/#{esc(id)}")
       end
 
       # OAuth only. An existing transaction_id appends products instead of duplicating.

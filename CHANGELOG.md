@@ -1,6 +1,12 @@
 # Changelog
 
-## 0.1.0 — Unreleased
+## 0.1.1 — Unreleased
+
+- Security: URL-escape ids interpolated into request paths, so a hostile
+  id like `"42/unsubscribe"` can no longer splice the request into a
+  different endpoint.
+
+## 0.1.0 — 2026-09-26
 
 - Initial release: full Kit v4 API surface (subscribers, tags, custom fields,
   forms, sequences, sequence emails, broadcasts, account, purchases, segments,

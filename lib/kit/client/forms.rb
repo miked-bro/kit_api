@@ -8,14 +8,14 @@ module Kit
       end
 
       def form_subscribers(id, **params)
-        request(:get, "/forms/#{id}/subscribers", params: params)
+        request(:get, "/forms/#{esc(id)}/subscribers", params: params)
       end
 
       def add_subscriber_to_form(form_id, email_address: nil, subscriber_id: nil, referrer: nil)
         if subscriber_id
-          request(:post, "/forms/#{form_id}/subscribers/#{subscriber_id}", body: { referrer: referrer }.compact)
+          request(:post, "/forms/#{esc(form_id)}/subscribers/#{esc(subscriber_id)}", body: { referrer: referrer }.compact)
         else
-          request(:post, "/forms/#{form_id}/subscribers",
+          request(:post, "/forms/#{esc(form_id)}/subscribers",
             body: { email_address: email_address, referrer: referrer }.compact)
         end
       end
